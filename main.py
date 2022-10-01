@@ -1,5 +1,6 @@
+from asyncio import events
 import pygame
-import button
+import button as btn
 import random
 
 tableSize = 10
@@ -19,7 +20,7 @@ def CreateTable(size):
         x = 0
         row = []
         for j in range(size):
-            row.append(button.Button(size,WIDTH,[x,y],[i,j])) 
+            row.append(btn.Button(size,WIDTH,[x,y],[i,j])) 
             x += WIDTH//tableSize
         y += HEIGHT//tableSize  
         table.append(row)
@@ -50,17 +51,37 @@ def DrawTable():
 
     pygame.display.update()
 
-def ButtonCheck():
+def ButtonCheck(clickType):
     for row in table:
         for button in row:
             if button.CheckForInput(pygame.mouse.get_pos()):
-                if(button.isMine):
-                    WIN.blit(button.mineImg,(button.position[0],button.position[1]))
-                else:
-                    WIN.blit(button.emptyImg,(button.position[0],button.position[1]))
-                    if button.nearMines > 0:
-                        buttonText = button.nearMinesText.render(str(button.nearMines),1,(0,0,0))
-                        WIN.blit(buttonText,(button.position[0]+10,button.position[1]))
+                if clickType == 1:
+                     ButtonClicked(button)
+                elif clickType == 3:
+                    SetFlag(button)
+
+def Burst(buttonIndex):
+    index = buttonIndex
+    for i in [-1,0,1]:
+        for j in [-1,0,1]:
+            pos = [index[0]+i,index[1]+j]
+            if( not (pos[0] < 0 or pos[0] >= tableSize or pos[1] < 0 or pos[1] >= tableSize) and not table[pos[0]][pos[1]].clicked):
+                    ButtonClicked(table[pos[0]][pos[1]])
+
+def ButtonClicked(button):
+    button.clicked = True
+    if(button.isMine):
+        WIN.blit(button.mineImg,(button.position[0],button.position[1]))
+    else:
+        WIN.blit(button.emptyImg,(button.position[0],button.position[1]))
+        if button.nearMines > 0:
+            buttonText = button.nearMinesText.render(str(button.nearMines),1,(0,0,0))
+            WIN.blit(buttonText,(button.position[0]+10,button.position[1]))
+        else:
+            Burst(button.index)
+
+def SetFlag(button):
+     WIN.blit(button.flagImg,(button.position[0],button.position[1]))
 
 def main():
     clock = pygame.time.Clock()
@@ -69,13 +90,13 @@ def main():
 
     while run:
         clock.tick(FPS)
-        for evant in pygame.event.get():
+        for event in pygame.event.get():
 
-            if evant.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
                 run = False
             
-            if evant.type == pygame.MOUSEBUTTONDOWN:
-                ButtonCheck()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                    ButtonCheck(event.button)
 
         pygame.display.update()
 

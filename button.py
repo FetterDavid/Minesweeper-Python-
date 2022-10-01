@@ -11,6 +11,8 @@ class Button():
         self.coverImg = pygame.transform.scale(pygame.image.load(os.path.join("Assets","button.png")),(self.size,self.size))
         self.mineImg = pygame.transform.scale(pygame.image.load(os.path.join("Assets","buttonRed.png")),(self.size,self.size))
         self.emptyImg = pygame.transform.scale(pygame.image.load(os.path.join("Assets","buttonGreen.png")),(self.size,self.size))
+        self.flagImg = pygame.transform.scale(pygame.image.load(os.path.join("Assets","buttonFlag.png")),(self.size,self.size))
+        self.clicked = False
         self.isMine = False
         self.nearMines = 0
         self.nearMinesText = pygame.font.SysFont("monospace", 50, bold=True)
