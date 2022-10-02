@@ -15,7 +15,7 @@ def CreateTable(size):
         x = 0
         row = []
         for j in range(size):
-            row.append(field.Button(size,WIDTH,[x,y],[i,j])) 
+            row.append(field.Field(size,WIDTH,[x,y],[i,j])) 
             x += WIDTH//tableSize
         y += HEIGHT//tableSize  
         table.append(row)

@@ -20,14 +20,15 @@ def ButtonCheck(clickType):
     for row in table:
         for button in row:
             if button.CheckForInput(pygame.mouse.get_pos()):
-                if clickType == 1:
-                    field.ButtonClicked(button, WIN, table, fieldTable.tableSize)
-                elif clickType == 3:
+                if clickType == 1 and not button.flaged:
+                    field.FieldClicked(button, WIN, table, fieldTable.tableSize)
+                elif clickType == 3 and not button.clicked:
                     field.SetFlag(button, WIN)
 
 def main():
     clock = pygame.time.Clock()
     run = True
+
     DrawTable()
 
     while run:
