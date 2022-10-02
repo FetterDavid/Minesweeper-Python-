@@ -19,7 +19,7 @@ def DrawTable():
 def ButtonCheck(clickType):
     for row in table:
         for button in row:
-            if button.CheckForInput(pygame.mouse.get_pos()):
+            if button.CheckForInput(pygame.mouse.get_pos()) and not button.disabled:
                 if clickType == 1 and not button.flaged:
                     field.FieldClicked(button, WIN, table, fieldTable.tableSize)
                 elif clickType == 3 and not button.clicked:

@@ -12,5 +12,6 @@ def IsWin(table):
 def GameOver(table,win):
     for row in table:
         for field in row:
+            field.disabled = True
             if field.isMine:
                 win.blit(field.mineImg,(field.position[0],field.position[1]))

@@ -23,6 +23,7 @@ class Field():
         self.flagImg = pygame.transform.scale(FLAG_IMG,(self.size,self.size))
         self.clicked = False
         self.flaged = False
+        self.disabled = False
         self.isMine = False
         self.nearMines = 0
         self.nearMinesText = pygame.font.SysFont("monospace", 50, bold=True)
