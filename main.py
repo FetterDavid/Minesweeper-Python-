@@ -3,7 +3,7 @@ import field
 import fieldTable
 
 
-WIN = pygame.display.set_mode((fieldTable.WIDTH,fieldTable.HEIGHT))
+WIN = pygame.display.set_mode((fieldTable.WIDTH,fieldTable.HEIGHT+50))
 FPS = 60
 pygame.display.set_caption("Minesweeper")
 table = fieldTable.CreateTable(fieldTable.tableSize)

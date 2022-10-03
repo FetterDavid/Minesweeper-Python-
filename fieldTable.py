@@ -4,13 +4,13 @@ import field
 tableSize = 15
 numberOfMine = 30
 
-BUTTON_SIZE = 50
+BUTTON_SIZE = 40
 HEIGHT = tableSize*BUTTON_SIZE
 WIDTH = tableSize*BUTTON_SIZE
 
 def CreateTable(size):
     table = []
-    y = 0
+    y = BUTTON_SIZE
     for i in range(size):
         x = 0
         row = []
