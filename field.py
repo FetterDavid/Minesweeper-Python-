@@ -45,13 +45,29 @@ def FieldClicked(button,win,table,tableSize):
     else:
         win.blit(button.emptyImg,(button.position[0],button.position[1]))
         if button.nearMines > 0:
-            buttonText = button.nearMinesText.render(str(button.nearMines),1,(0,0,0))
+            buttonText = SetNearMinesText(button)
             win.blit(buttonText,(button.position[0]+8,button.position[1]))
         else:
             Burst(button.index, table, win, tableSize)
     
     if gameManager.IsWin(table):
         print("Win")
+
+def SetNearMinesText(button):
+    color = (0,0,0)
+    if button.nearMines == 1:
+        color = (0,0,139)
+    elif button.nearMines == 2:
+        color = (0,128,0)
+    elif button.nearMines == 3:
+        color = (200,0,0)
+    elif button.nearMines == 4:
+        color = (11, 11, 69)
+    elif button.nearMines == 5:
+        color = (128,0,0)
+        
+    buttonText = button.nearMinesText.render(str(button.nearMines),1,color)
+    return buttonText
 
 def Burst(buttonIndex,table,win,tableSize):
     index = buttonIndex
