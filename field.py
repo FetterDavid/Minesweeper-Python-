@@ -38,20 +38,20 @@ class Field():
     def SetToMine(self):
         self.isMine = True
 
-def FieldClicked(button,win,table,tableSize):
+def FieldClicked(button,win,table,tableSize,gameBtn):
     button.clicked = True
     if(button.isMine):
-        gameManager.GameOver(table,win)
+        gameManager.GameOver(table,win,gameBtn)
     else:
         win.blit(button.emptyImg,(button.position[0],button.position[1]))
         if button.nearMines > 0:
             buttonText = SetNearMinesText(button)
             win.blit(buttonText,(button.position[0]+8,button.position[1]))
         else:
-            Burst(button.index, table, win, tableSize)
+            Burst(button.index, table, win, tableSize, gameBtn)
     
     if gameManager.IsWin(table):
-        print("Win")
+        win.blit(gameBtn.winImg,(gameBtn.position[0],gameBtn.position[1]))
 
 def SetNearMinesText(button):
     color = (0,0,0)
@@ -69,13 +69,13 @@ def SetNearMinesText(button):
     buttonText = button.nearMinesText.render(str(button.nearMines),1,color)
     return buttonText
 
-def Burst(buttonIndex,table,win,tableSize):
+def Burst(buttonIndex,table,win,tableSize,gameBtn):
     index = buttonIndex
     for i in [-1,0,1]:
         for j in [-1,0,1]:
             pos = [index[0]+i,index[1]+j]
             if( not (pos[0] < 0 or pos[0] >= tableSize or pos[1] < 0 or pos[1] >= tableSize) and not table[pos[0]][pos[1]].clicked):
-                FieldClicked(table[pos[0]][pos[1]], win, table, tableSize)
+                FieldClicked(table[pos[0]][pos[1]], win, table, tableSize,gameBtn)
 
 def SetFlag(button,win):
     if button.flaged:

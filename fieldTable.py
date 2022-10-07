@@ -1,8 +1,8 @@
 import random
 import field
 
-tableSize = 15
-numberOfMine = 30
+tableSize = 10
+numberOfMine = 5
 
 BUTTON_SIZE = 40
 HEIGHT = tableSize*BUTTON_SIZE
@@ -10,7 +10,7 @@ WIDTH = tableSize*BUTTON_SIZE
 
 def CreateTable(size):
     table = []
-    y = BUTTON_SIZE
+    y = BUTTON_SIZE * 2
     for i in range(size):
         x = 0
         row = []
