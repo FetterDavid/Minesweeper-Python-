@@ -75,14 +75,18 @@ def Burst(buttonIndex,table,win,tableSize,gameBtn,myTimer):
     for i in [-1,0,1]:
         for j in [-1,0,1]:
             pos = [index[0]+i,index[1]+j]
-            if( not (pos[0] < 0 or pos[0] >= tableSize or pos[1] < 0 or pos[1] >= tableSize) and not table[pos[0]][pos[1]].clicked):
+            if( not (pos[0] < 0 or pos[0] >= tableSize or pos[1] < 0 or pos[1] >= tableSize) and not table[pos[0]][pos[1]].clicked 
+            and not table[pos[0]][pos[1]].flaged ):
                 FieldClicked(table[pos[0]][pos[1]], win, table, tableSize,gameBtn,myTimer)
 
-def SetFlag(button,win):
+def SetFlag(button,win, myLeftMines):
     if button.flaged:
         button.flaged = False
         win.blit(button.coverImg,(button.position[0],button.position[1]))
-    else:
+        myLeftMines.DrawLeftMines(win,1)
+    elif myLeftMines.leftMine > 0:
         button.flaged = True
         win.blit(button.flagImg,(button.position[0],button.position[1]))
+        myLeftMines.DrawLeftMines(win,-1)
+
     

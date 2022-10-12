@@ -3,6 +3,7 @@ import field
 import fieldTable
 import gameButton
 import timer
+import leftMines
 
 WIN = pygame.display.set_mode((fieldTable.WIDTH,fieldTable.HEIGHT+fieldTable.BUTTON_SIZE*2))
 FPS = 60
@@ -10,6 +11,7 @@ pygame.display.set_caption("Minesweeper")
 table = fieldTable.CreateTable(fieldTable.tableSize)
 gameBtn = gameButton.GameButton(fieldTable.BUTTON_SIZE*1.5,[fieldTable.WIDTH/2-fieldTable.BUTTON_SIZE*1.5/2,fieldTable.BUTTON_SIZE*0.25]) 
 myTimer = timer.Timer()
+myLeftMines = leftMines.LeftMines(fieldTable.numberOfMine)
 
 def DrawWindow():
     DrawTable()
@@ -21,6 +23,9 @@ def DrawTable():
     for row in table:
         for button in row:
             WIN.blit(button.coverImg,(button.position[0],button.position[1]))
+
+    myLeftMines.DrawLeftMines(WIN,0)
+    
     pygame.display.update()
 
 def ButtonCheck(clickType):
@@ -30,8 +35,7 @@ def ButtonCheck(clickType):
                 if clickType == 1 and not button.flaged:
                     field.FieldClicked(button, WIN, table, fieldTable.tableSize, gameBtn,myTimer)
                 elif clickType == 3 and not button.clicked:
-                    field.SetFlag(button, WIN)
-
+                    field.SetFlag(button, WIN, myLeftMines)
 def main():
     clock = pygame.time.Clock()
     run = True
