@@ -3,6 +3,7 @@ import pygame
 import os
 import fieldTable
 import gameManager
+import timer
 
 pygame.font.init()
 
@@ -38,17 +39,17 @@ class Field():
     def SetToMine(self):
         self.isMine = True
 
-def FieldClicked(button,win,table,tableSize,gameBtn):
+def FieldClicked(button,win,table,tableSize,gameBtn,myTimer):
     button.clicked = True
     if(button.isMine):
-        gameManager.GameOver(table,win,gameBtn)
+        gameManager.GameOver(table,win,gameBtn,myTimer)
     else:
         win.blit(button.emptyImg,(button.position[0],button.position[1]))
         if button.nearMines > 0:
             buttonText = SetNearMinesText(button)
             win.blit(buttonText,(button.position[0]+8,button.position[1]))
         else:
-            Burst(button.index, table, win, tableSize, gameBtn)
+            Burst(button.index, table, win, tableSize, gameBtn,myTimer)
     
     if gameManager.IsWin(table):
         win.blit(gameBtn.winImg,(gameBtn.position[0],gameBtn.position[1]))
@@ -69,13 +70,13 @@ def SetNearMinesText(button):
     buttonText = button.nearMinesText.render(str(button.nearMines),1,color)
     return buttonText
 
-def Burst(buttonIndex,table,win,tableSize,gameBtn):
+def Burst(buttonIndex,table,win,tableSize,gameBtn,myTimer):
     index = buttonIndex
     for i in [-1,0,1]:
         for j in [-1,0,1]:
             pos = [index[0]+i,index[1]+j]
             if( not (pos[0] < 0 or pos[0] >= tableSize or pos[1] < 0 or pos[1] >= tableSize) and not table[pos[0]][pos[1]].clicked):
-                FieldClicked(table[pos[0]][pos[1]], win, table, tableSize,gameBtn)
+                FieldClicked(table[pos[0]][pos[1]], win, table, tableSize,gameBtn,myTimer)
 
 def SetFlag(button,win):
     if button.flaged:

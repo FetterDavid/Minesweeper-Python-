@@ -1,6 +1,7 @@
 import fieldTable
 import pygame
 import gameButton
+import timer
 
 def IsWin(table):
     for row in table:
@@ -10,7 +11,7 @@ def IsWin(table):
     
     return True
 
-def GameOver(table,win,gameBtn):
+def GameOver(table,win,gameBtn,myTimer):
     for row in table:
         for field in row:
             field.disabled = True
@@ -19,4 +20,5 @@ def GameOver(table,win,gameBtn):
             if not field.isMine and field.flaged:
                 win.blit(field.incorrectFlagImg,(field.position[0],field.position[1]))
 
+    myTimer.StopTimer()
     win.blit(gameBtn.deadImg,(gameBtn.position[0],gameBtn.position[1]))
