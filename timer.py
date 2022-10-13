@@ -4,7 +4,7 @@ import os
 
 pygame.font.init()
 
-COVER_IMG = pygame.image.load(os.path.join("Assets","fieldCover.png"))
+COVER_IMG = pygame.image.load(os.path.join("Assets","black.png"))
 
 class Timer():
 
@@ -20,8 +20,8 @@ class Timer():
         if not self.stoped:
             self.timeSpent = int(time.time() - self.startTime)
             buttonText = self.timeText.render(str(self.timeSpent),1,(255,255,255))
-            win.blit(self.coverImg,(0,0))
-            win.blit(buttonText,(14,0))
+            win.blit(self.coverImg,(win.get_size()[0]-100,0))
+            win.blit(buttonText,(win.get_size()[0]-100,0))
 
     def ResetTimer(self,win):
         self.stoped = False
@@ -29,8 +29,8 @@ class Timer():
         self.startTime = time.time()
         self.timeSpent = int(time.time() - self.startTime)
         buttonText = self.timeText.render(str(self.timeSpent),1,(255,255,255))
-        win.blit(self.coverImg,(0,0))
-        win.blit(buttonText,(14,0))
+        win.blit(self.coverImg,(win.get_size()))
+        win.blit(buttonText,(win.get_size()))
     
     def StopTimer(self):
         self.stoped = True

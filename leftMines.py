@@ -3,7 +3,7 @@ import os
 
 pygame.font.init()
 
-COVER_IMG = pygame.image.load(os.path.join("Assets","fieldCover.png"))
+COVER_IMG = pygame.image.load(os.path.join("Assets","black.png"))
 
 class LeftMines():
 
@@ -16,6 +16,12 @@ class LeftMines():
     def DrawLeftMines(self,win,type):
         # Type: 0 - stay ; 1 - add mine ; -2 -remove mine
         self.leftMine+=type
-        buttonText = self.mineText.render(str(self.leftMine),1,(255,255,255))
+        buttonText = self.mineText.render(str(self.leftMine),1,(255,0,0))
+        win.blit(self.coverImg,(0,40))
+        win.blit(buttonText,(14,40))
+
+    def ResetLeftMines(self,win,mineAmount):
+        self.leftMine=mineAmount
+        buttonText = self.mineText.render(str(self.leftMine),1,(255,0,0))
         win.blit(self.coverImg,(0,40))
         win.blit(buttonText,(14,40))

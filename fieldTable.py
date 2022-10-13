@@ -1,8 +1,8 @@
 import random
 import field
 
-tableSize = 10
-numberOfMine = 5
+tableSize = 15
+numberOfMine = 30
 
 BUTTON_SIZE = 40
 HEIGHT = tableSize*BUTTON_SIZE

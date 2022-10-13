@@ -14,8 +14,10 @@ myTimer = timer.Timer()
 myLeftMines = leftMines.LeftMines(fieldTable.numberOfMine)
 
 def DrawWindow():
+    WIN.fill((128,128,128))
     DrawTable()
     WIN.blit(gameBtn.playImg,(gameBtn.position[0],gameBtn.position[1]))
+    myLeftMines.DrawLeftMines(WIN,0)
 
 def DrawTable():
     global table 
@@ -24,8 +26,6 @@ def DrawTable():
         for button in row:
             WIN.blit(button.coverImg,(button.position[0],button.position[1]))
 
-    myLeftMines.DrawLeftMines(WIN,0)
-    
     pygame.display.update()
 
 def ButtonCheck(clickType):
@@ -54,6 +54,8 @@ def main():
                     if gameBtn.CheckForInput(pygame.mouse.get_pos()):
                         DrawWindow()
                         myTimer.ResetTimer(WIN)
+                        myLeftMines.ResetLeftMines(WIN,fieldTable.numberOfMine)
+
 
         myTimer.DrawTime(WIN)
         pygame.display.update()
