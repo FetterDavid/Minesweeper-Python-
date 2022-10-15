@@ -19,16 +19,16 @@ class Timer():
     def DrawTime(self,win):
         if not self.stoped:
             self.timeSpent = int(time.time() - self.startTime)
-            buttonText = self.timeText.render(str(self.timeSpent),1,(255,255,255))
-            win.blit(self.coverImg,(win.get_size()[0]-100,0))
-            win.blit(buttonText,(win.get_size()[0]-100,0))
+            buttonText = self.timeText.render(str(self.timeSpent),1,(255,0,0))
+            win.blit(self.coverImg,(win.get_size()[0]-100,25))
+            win.blit(buttonText,(win.get_size()[0]-90,25))
 
     def ResetTimer(self,win):
         self.stoped = False
 
         self.startTime = time.time()
         self.timeSpent = int(time.time() - self.startTime)
-        buttonText = self.timeText.render(str(self.timeSpent),1,(255,255,255))
+        buttonText = self.timeText.render(str(self.timeSpent),1,(255,0,0))
         win.blit(self.coverImg,(win.get_size()))
         win.blit(buttonText,(win.get_size()))
     

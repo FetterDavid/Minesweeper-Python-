@@ -40,6 +40,9 @@ class Field():
         self.isMine = True
 
 def FieldClicked(button,win,table,tableSize,gameBtn,myTimer):
+    if gameManager.IsWin(table,myTimer):
+        return
+
     button.clicked = True
     if(button.isMine):
         gameManager.GameOver(table,win,gameBtn,myTimer)
@@ -51,7 +54,7 @@ def FieldClicked(button,win,table,tableSize,gameBtn,myTimer):
         else:
             Burst(button.index, table, win, tableSize, gameBtn,myTimer)
     
-    if gameManager.IsWin(table):
+    if gameManager.IsWin(table,myTimer):
         win.blit(gameBtn.winImg,(gameBtn.position[0],gameBtn.position[1]))
 
 def SetNearMinesText(button):
